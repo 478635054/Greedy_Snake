@@ -60,19 +60,28 @@ while running:
 
         # monitor the keyboard
         elif event.type == KEYDOWN:
-            if event.key == K_UP:
+            if event.key == K_UP or event.key == K_w:
                 if variables.direct == 'right' or variables.direct == 'left':
                     variables.direct = 'up'
-            if event.key == K_DOWN:
+            if event.key == K_DOWN or event.key == K_s:
                 if variables.direct == 'right' or variables.direct == 'left':
                     variables.direct = 'down'
-            if event.key == K_RIGHT:
+            if event.key == K_RIGHT or event.key == K_d:
                 if variables.direct == 'up' or variables.direct == 'down':
                     variables.direct = 'right'
-            if event.key == K_LEFT:
+            if event.key == K_LEFT or event.key == K_a:
                 if variables.direct == 'up' or variables.direct =='down':
                     variables.direct ='left'
+            if event.key == K_p:
+                variables.pause = True
 
+            #pause the game
+            while variables.pause == True:
+                for event in pygame.event.get():
+                    if event.type == KEYDOWN:
+                        if event.key == K_p:
+                            variables.pause = False
+                        
     #offer the food
     eat = (head.row == food.row and head.column == food.column)
     if eat:
