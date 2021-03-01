@@ -74,6 +74,8 @@ while running:
                     variables.direct ='left'
             if event.key == K_p:
                 variables.pause = True
+            if event.key == K_ESCAPE:
+                pygame.event.post(pygame.event.Event(QUIT))
 
             #pause the game
             while variables.pause == True:
