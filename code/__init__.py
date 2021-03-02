@@ -1,6 +1,7 @@
 import pygame
 import random
 import sys
+import time
 from pygame.locals import *
 import variables
 class Point():
@@ -46,19 +47,21 @@ food = getfood()
 
 # insert the image and adapt it to the screen
 backgroundimage = pygame.image.load('background.png')
-newingimage = pygame.transform.scale(backgroundimage,(variables.width,variables.height))
-variables.screen.blit(newingimage,(0,0))
+gameoverimage = pygame.image.load('gameover.jpg')
+newbackgroundimage = pygame.transform.scale(backgroundimage,(variables.width,variables.height))
+newgameoverimage = pygame.transform.scale(backgroundimage,(variables.width,variables.height))
+variables.screen.blit(newbackgroundimage,(0,0))
 pygame.display.set_caption('Greedy Snake')
 
 running = True
 clock = pygame.time.Clock()
 while running:
-    clock.tick(20)
+    clock.tick(5)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-        # monitor the keyboard
+        # monitor the keyboard and change the direction
         elif event.type == KEYDOWN:
             if event.key == K_UP or event.key == K_w:
                 if variables.direct == 'right' or variables.direct == 'left':
@@ -75,6 +78,7 @@ while running:
             if event.key == K_p:
                 variables.pause = True
             if event.key == K_ESCAPE:
+                variables.screen.blit(newgameoverimage,(0,0))
                 pygame.event.post(pygame.event.Event(QUIT))
 
             #pause the game
@@ -111,13 +115,14 @@ while running:
             death = True
             break
     if death:
-        print('Game over')
+        variables.screen.blit(gameoverimage,(0,0))
         running = False
+        variables.screen.blit(newgameoverimage,(0,0))
+        time.sleep(3)
+        
 
     # draw objects
-    backgroundimage = pygame.image.load('background.png')
-    newingimage = pygame.transform.scale(backgroundimage,(variables.width,variables.height))
-    variables.screen.blit(newingimage,(0,0))
+    variables.screen.blit(newbackgroundimage,(0,0))
     draw(head, variables.head_color)
     draw(food, variables.food_color)
     for body in snake:
