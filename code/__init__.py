@@ -47,7 +47,6 @@ food = getfood()
 
 # insert the image and adapt it to the screen
 backgroundimage = pygame.image.load('background.png')
-gameoverimage = pygame.image.load('gameover.jpg')
 newbackgroundimage = pygame.transform.scale(backgroundimage,(variables.width,variables.height))
 newgameoverimage = pygame.transform.scale(backgroundimage,(variables.width,variables.height))
 variables.screen.blit(newbackgroundimage,(0,0))
