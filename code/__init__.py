@@ -114,12 +114,11 @@ while running:
             death = True
             break
     if death:
-        variables.screen.blit(gameoverimage,(0,0))
+        #variables.screen.blit(gameoverimage,(0,0))
         running = False
-        variables.screen.blit(newgameoverimage,(0,0))
+        #variables.screen.blit(newgameoverimage,(0,0))
         time.sleep(3)
         
-
     # draw objects
     variables.screen.blit(newbackgroundimage,(0,0))
     draw(head, variables.head_color)
